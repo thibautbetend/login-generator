@@ -1,7 +1,10 @@
 package geco;
 
 import java.text.Normalizer;
+import java.util.List;
 import java.util.regex.Pattern;
+
+import static java.lang.Integer.parseInt;
 
 /**
  * Classe representant un generateur de login
@@ -37,8 +40,17 @@ public class LoginGenerator {
         String p = deAccent(prenom.substring(0,1).toUpperCase());
         String n = deAccent(nom.substring(0,3).toUpperCase());
         String login = p+n ;
+
         if (loginService.loginExists(login)) {
-            login = login + "1" ;
+            int count = 0;
+            for(String monMDP : loginService.findAllLoginsStartingWith(login))
+            {
+                if(monMDP.substring(0,4).equals(login))
+                {
+                    count++;
+                }
+            }
+            login = login + count ;
         }
         loginService.addLogin(login);
         return login;
