@@ -37,4 +37,9 @@ public class LoginGeneratorTest {
     {
         assertEquals("PDUR", monLoginGenerator.generateLoginForNomAndPrenom("Durant", "Paul"));
     }
+    @Test
+    public void generate_login_for_nom_and_prenom_CT5()
+    {
+        assertEquals("PDU", monLoginGenerator.generateLoginForNomAndPrenom("Du", "Paul"));
+    }
 }
